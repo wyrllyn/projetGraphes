@@ -17,6 +17,8 @@
 class Graph {
 private:
   std::map<int, Node> nodes;
+protected:
+  void parseLine(std::string line);
 public:
 	Graph(std::string fileUrl);
 	virtual ~Graph();
