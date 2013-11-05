@@ -20,3 +20,6 @@ void Node::addNeighbor(Node node) {
 	this->neighbors.push_back(node);
 }
 
+bool Node::operator<(const Node& n) {
+	return this->id < n.id;
+}

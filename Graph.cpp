@@ -8,26 +8,29 @@
 #include "Graph.h"
 
 #include <fstream>
+#include <iostream>
 
-Graph::Graph(std::string fileUrl) {
+Graph::Graph(const std::string fileUrl) {
 	std::ifstream ifs(fileUrl);
-	  for (std::string line : ifs) {
-		  if (line.find("e") == 0) { //line starts with 'e'
-			  std::stringstream ss(line);//TODO:parse line
-		  } else if (line.find_last_of("number of vertices:") != std::string::npos) {
-			  std::string::size_type pos = line.find_last_of("number of vertices:");
-			  line = line.substr(pos, std::string::npos);
-			  int numberOfNodes;
-			  std::stringstream(line) >> numberOfNodes;
-			  for (int i = 0; i < numberOfNodes; i++) {
-				  this->nodes.insert(Node(i));
-			  }
-		  }
+	while (!ifs.eof()) {
+		std::string line;
+		getline(ifs, line);
+		if (line.find("e") == 0) { //line starts with 'e'
+			//std::stringstream ss(line);//TODO:parse line
+		} else if (line.find_last_of("number of vertices") != std::string::npos) {
+			std::string::size_type pos = line.find_last_of(":");
+			line = line.substr(pos, std::string::npos);
+			int numberOfNodes(0);
+			//int numberOfNodes = std::stoi(line); //TODO:number of nodes
+			for (int i = 0; i < numberOfNodes; i++) {
+				this->nodes.insert(NODE_INSERT(i));
+			}
+		}
 	  }
 	  ifs.close();
 }
 
 Graph::~Graph() {
-	// TODO Auto-generated destructor stub
+
 }
 

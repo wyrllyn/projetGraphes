@@ -19,6 +19,7 @@ public:
 	virtual ~Node();
 
 	void addNeighbor(Node node);
+	bool operator<(const Node& n);
 };
 
 #endif /* NODE_H_ */
