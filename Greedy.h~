@@ -1,0 +1,17 @@
+#ifndef GREEDY_H
+#define GREEDY_H
+
+#include "Graph.h"
+
+class Greddy {
+
+private:
+	Graph g;
+	Graph clique;
+public:
+
+};
+
+
+
+#endif
