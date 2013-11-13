@@ -23,3 +23,7 @@ void Node::addNeighbor(Node node) {
 bool Node::operator<(const Node& n) {
 	return this->id < n.id;
 }
+
+std::vector<Node> Node::getNeighbors(){
+	return neighbors;
+}

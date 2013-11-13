@@ -50,7 +50,7 @@ void Graph::parseLine(std::string line) {
 	nodes.at(origin).addNeighbor(nodes.at(target));
 }
 
-std::map Graph::getNodes()
+std::map<int, Node> Graph::getNodes()
 {
 	return nodes;	
 }

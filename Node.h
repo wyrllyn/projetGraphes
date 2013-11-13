@@ -20,6 +20,7 @@ public:
 
 	void addNeighbor(Node node);
 	bool operator<(const Node& n);
+	std::vector<Node> getNeighbors();
 };
 
 #endif /* NODE_H_ */
