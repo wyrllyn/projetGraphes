@@ -1,9 +1,6 @@
 #include "Greedy.h"
 
-Greedy::Greedy(Graph g) :
-	original(g),
-	clique()
-{
+Greedy::Greedy(Graph g) : original(g), clique() {
 
 }
 
@@ -27,7 +24,7 @@ void Greedy::findMax(){
 		unsigned int current = original.getNodes().at(biggest).getNeighbors().at(i).getId();
 
 		// commonNodes initialization
-		Graph commonNodes = new Graph();
+		Graph commonNodes = Graph();
 		commonNodes.addNode(original.getNodes().at(biggest));
 		commonNodes.addNode(original.getNodes().at(current));
 		// vector of neighbors
@@ -43,7 +40,7 @@ void Greedy::findMax(){
 		//verification only if commonNodes' size is bigger than cliqueSize
 		if (commonNodes.getNodes().size() > clique.getNodes().size()){
 			if (commonNodes.isClique()){
-				clique = new Graph(commonNodes);
+				clique = Graph(commonNodes);
 			}
 			else{
 				//TODO : verif si on peut créer une clique à partir de commonNodes
