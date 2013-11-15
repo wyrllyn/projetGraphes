@@ -19,6 +19,7 @@ public:
 	virtual ~Node();
 
 	void addNeighbor(Node node);
+	int getId();
 	bool operator<(const Node& n);
 	std::vector<Node> getNeighbors();
 };

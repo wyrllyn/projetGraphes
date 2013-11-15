@@ -41,7 +41,7 @@ Graph::Graph(){
 }
 
 void Graph::addNode(Node n){
-	nodes.insert(NODE_INSERT(n));
+	nodes.insert(NODE_INSERT(n.getId()));
 }
 
 Graph::~Graph() {

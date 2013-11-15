@@ -27,3 +27,7 @@ bool Node::operator<(const Node& n) {
 std::vector<Node> Node::getNeighbors(){
 	return neighbors;
 }
+
+int Node::getId() {
+	return id;
+}
