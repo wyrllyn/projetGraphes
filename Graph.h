@@ -25,6 +25,7 @@ public:
 	//sara : pour avoir accès aux nodes
 	std::map<unsigned int, Node> getNodes();
 	void addNode(Node n);
+	bool isClique();
 	virtual ~Graph();
 };
 
