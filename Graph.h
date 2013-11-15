@@ -21,9 +21,10 @@ protected:
   void parseLine(std::string line);
 public:
 	Graph(std::string fileUrl);
+	Graph();
 	//sara : pour avoir accès aux nodes
 	std::map<int, Node> getNodes();
-	//TODO (sara) addNode ? could be great to construct a clique
+	void addNode(Node n);
 	virtual ~Graph();
 };
 

@@ -36,6 +36,14 @@ Graph::Graph(const std::string fileUrl) {
 	ifs.close();
 }
 
+Graph::Graph(){
+
+}
+
+void Graph::addNode(Node n){
+	nodes.insert(NODE_INSERT(n));
+}
+
 Graph::~Graph() {
 
 }
