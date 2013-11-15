@@ -1,7 +1,8 @@
 #include "Greedy.h"
 
 Greedy::Greedy(Graph g){
-	//TODO init
+	clique = new Graph();
+	//TODO init original
 }
 
 void Greedy::findMax(){
@@ -16,21 +17,32 @@ void Greedy::findMax(){
 			bSize = original.getNodes()[i].getNeighbors().size();
 		}
 	}
+
 	int cliqueSize = 0;
 	//2nd loop to construct a sort of clique (yeah, sort of... )
-	for (unsigned i = 0; i < bSize ; i++){
+	for (int i = 0; i < bSize ; i++){
+		// id of the current neighbor of biggest
 		int current = original.getNodes()[biggest].getNeighbors().at(i);
 		int tempSize = 2;
-		//TODO init clique with values biggest and current
+		// vector of neighbors
 		std::vector<Node> tempVector = original.getNodes()[biggest].getNeighbors();
-		for (int j = 0; j < original.getNodes()[biggest].getNeighbors().size(); j++){
-			// if currentNode contains nodes in commun with biggest
-			if (std::find(tempVector.begin(), tempVector.end(), original.getNodes()[biggest].getNeighbors().at(j))){
+
+		for (int j = 0; j < original.getNodes()[current].getNeighbors().size(); j++){
+			// if currentNode contains nodes in common with biggest
+			if (std::find(tempVector.begin(), tempVector.end(), original.getNodes()[current].getNeighbors().at(j))){
 				tempSize++;
 			}
 		}
 		if (tempSize > cliqueSize){
-			//TODO : construction of a clique
+			clique = new Graph();
+			clique.addNode(original.getNodes()[biggest]);
+			clique.addNode(original.getNodes()[current]);
+			for (int j = 0; j < original.getNodes()[current].getNeighbors().size(); j++){
+					// if currentNode contains nodes in common with biggest
+					if (std::find(tempVector.begin(), tempVector.end(), original.getNodes()[current].getNeighbors().at(j))){
+						clique.addNode(original.getNodes()[current].getNeighbors().at(j));
+					}
+				}
 		}
 	}
 

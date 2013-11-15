@@ -10,7 +10,6 @@ private:
 	Graph clique;
 public:
 	Greedy(Graph g);
-	// idea
 	void findMax();
 };
 
