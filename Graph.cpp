@@ -25,8 +25,8 @@ Graph::Graph(const std::string fileUrl) {
 				&& line.find("number of vertices") != std::string::npos) {
 			std::string::size_type pos = line.find_last_of(":") + 1;
 			line = line.substr(pos);
-			int numberOfNodes = std::stoi(line); //TODO:number of nodes
-			for (int i = 1; i < numberOfNodes; i++) {
+			unsigned int numberOfNodes = std::stoi(line); //TODO:number of nodes
+			for (unsigned int i = 1; i < numberOfNodes; i++) {
 				this->nodes.insert(NODE_INSERT(i));
 			}
 			std::cout << "Created " << numberOfNodes << " nodes" << std::endl;
@@ -58,7 +58,7 @@ void Graph::parseLine(std::string line) {
 	nodes.at(origin).addNeighbor(nodes.at(target));
 }
 
-std::map<int, Node> Graph::getNodes()
+std::map<unsigned int, Node> Graph::getNodes()
 {
 	return nodes;	
 }

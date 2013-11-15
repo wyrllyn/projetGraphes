@@ -12,18 +12,18 @@
 #include <string>
 #include "Node.h"
 
-#define NODE_INSERT(x) std::pair<int,Node>(x, Node(x))
+#define NODE_INSERT(x) std::pair<unsigned int,Node>(x, Node(x))
 
 class Graph {
 private:
-  std::map<int, Node> nodes;
+  std::map<unsigned int, Node> nodes;
 protected:
   void parseLine(std::string line);
 public:
 	Graph(std::string fileUrl);
 	Graph();
 	//sara : pour avoir accès aux nodes
-	std::map<int, Node> getNodes();
+	std::map<unsigned int, Node> getNodes();
 	void addNode(Node n);
 	virtual ~Graph();
 };
