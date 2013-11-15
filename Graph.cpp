@@ -27,7 +27,7 @@ Graph::Graph(const std::string fileUrl) {
 			line = line.substr(pos);
 			unsigned int numberOfNodes = std::stoi(line); //TODO:number of nodes
 			for (unsigned int i = 1; i < numberOfNodes; i++) {
-				this->nodes.insert(NODE_INSERT(i));
+				this->nodes.insert(NODE_INSERT_NEW(i));
 			}
 			std::cout << "Created " << numberOfNodes << " nodes" << std::endl;
 		}
@@ -40,20 +40,26 @@ Graph::Graph(){
 
 }
 
-void Graph::addNode(Node n){
-	nodes.insert(NODE_INSERT(n.getId()));
+Graph::Graph(const Graph& graph) : nodes(graph.nodes) {
+
 }
 
 Graph::~Graph() {
 
 }
 
+void Graph::addNode(Node& n){
+	nodes.insert(NODE_INSERT(n));
+}
+
+
+
 void Graph::parseLine(std::string line) {
 	std::string temp = line.substr(line.find_first_of(" "), line.find_last_of(" "));
 	int origin = std::stoi(temp);
 
 	temp = line.substr(line.find_last_of(" "));
-	int target = stoi(temp);
+	int target = std::stoi(temp);
 
 	nodes.at(origin).addNeighbor(nodes.at(target));
 }
@@ -77,6 +83,6 @@ bool Graph::isClique(){
 
 std::map<unsigned int, Node> Graph::getNodes()
 {
-	return nodes;	
+	return nodes;
 }
 

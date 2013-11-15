@@ -8,15 +8,14 @@
 #include "Node.h"
 
 Node::Node(int id) : id(id) {
-	// TODO Auto-generated constructor stub
 
 }
 
 Node::~Node() {
-	// TODO Auto-generated destructor stub
+
 }
 
-void Node::addNeighbor(Node node) {
+void Node::addNeighbor(Node& node) {
 	this->neighbors.push_back(node);
 }
 

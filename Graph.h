@@ -12,7 +12,8 @@
 #include <string>
 #include "Node.h"
 
-#define NODE_INSERT(x) std::pair<unsigned int,Node>(x, Node(x))
+#define NODE_INSERT_NEW(x) std::pair<unsigned int, Node>(x, Node(x))
+#define NODE_INSERT(node) std::pair<unsigned int, Node>(node.getId(), node)
 
 class Graph {
 private:
@@ -22,9 +23,10 @@ protected:
 public:
 	Graph(std::string fileUrl);
 	Graph();
+	Graph(const Graph& graph);
 	//sara : pour avoir accès aux nodes
 	std::map<unsigned int, Node> getNodes();
-	void addNode(Node n);
+	void addNode(Node& n);
 	bool isClique();
 	virtual ~Graph();
 };

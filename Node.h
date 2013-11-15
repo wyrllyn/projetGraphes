@@ -18,7 +18,7 @@ public:
 	Node(int id);
 	virtual ~Node();
 
-	void addNeighbor(Node node);
+	void addNeighbor(Node& node);
 	int getId();
 	std::vector<Node> getNeighbors();
 
