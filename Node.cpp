@@ -24,6 +24,10 @@ bool Node::operator<(const Node& n) {
 	return this->id < n.id;
 }
 
+bool Node::operator ==(const Node& n) {
+	return n.id == id;
+}
+
 std::vector<Node> Node::getNeighbors(){
 	return neighbors;
 }
