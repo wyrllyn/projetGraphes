@@ -24,6 +24,7 @@ public:
 
 	bool operator<(const Node& n);
 	bool operator==(const Node& n);
+	bool operator!=(const Node& n);
 };
 
 #endif /* NODE_H_ */

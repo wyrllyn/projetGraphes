@@ -60,9 +60,9 @@ void Graph::parseLine(std::string line) {
 
 bool Graph::isClique(){
 	bool ok = true;
-	for (int i = 0; i < nodes.size(); i++){
+	for (unsigned int i = 0; i < nodes.size(); i++){
 		std::vector<Node> temp = nodes.at(i).getNeighbors();
-		for (int j = 0; j < nodes.size(); j++){
+		for (unsigned int j = 0; j < nodes.size(); j++){
 			if (nodes.at(i) != nodes.at(j)){
 				// if a graph's node isn't found into temp then it isn't a clique
 				if (std::find(temp.begin(), temp.end(), nodes.at(i) ) == temp.end()){
