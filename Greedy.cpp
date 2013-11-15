@@ -20,31 +20,34 @@ void Greedy::findMax(){
 		}
 	}
 
-	int cliqueSize = 0;
 	//2nd loop to construct a sort of clique (yeah, sort of... )
 	for (unsigned int i = 0; i < bSize ; i++){
+
 		// id of the current neighbor of biggest
 		unsigned int current = original.getNodes().at(biggest).getNeighbors().at(i).getId();
-		int tempSize = 2;
+
+		// commonNodes initialization
+		Graph commonNodes = new Graph();
+		commonNodes.addNode(original.getNodes().at(biggest));
+		commonNodes.addNode(original.getNodes().at(current));
 		// vector of neighbors
 		std::vector<Node> tempVector = original.getNodes().at(biggest).getNeighbors();
 
 		for (unsigned int j = 0; j < original.getNodes().at(current).getNeighbors().size(); j++){
-			// if currentNode contains nodes in common with biggest
+			// if currentNode contains nodes in common with biggest => added into commonNodes
 			if (FIND(tempVector, original, current, j)){
-				tempSize++;
+				commonNodes.addNode(original.getNodes().at(current).getNeighbors().at(j));
 			}
 		}
-		if (tempSize > cliqueSize){
-			clique = Graph();
-			clique.addNode(original.getNodes().at(biggest));
-			clique.addNode(original.getNodes().at(current));
-			for (unsigned int j = 0; j < original.getNodes().at(current).getNeighbors().size(); j++){
-					// if currentNode contains nodes in common with biggest
-					if (FIND(tempVector, original, current, j)){
-						clique.addNode(original.getNodes().at(current).getNeighbors().at(j));
-					}
-				}
+
+		//verification only if commonNodes' size is bigger than cliqueSize
+		if (commonNodes.getNodes().size() > clique.getNodes().size()){
+			if (commonNodes.isClique()){
+				clique = new Graph(commonNodes);
+			}
+			else{
+				//TODO : verif si on peut créer une clique à partir de commonNodes
+			}
 		}
 	}
 
