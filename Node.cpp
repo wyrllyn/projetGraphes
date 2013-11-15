@@ -15,11 +15,11 @@ Node::~Node() {
 
 }
 
-void Node::addNeighbor(Node& node) {
-	this->neighbors.push_back(node);
+void Node::addNeighbor(int nodeId) {
+	this->neighbors.push_back(nodeId);
 }
 
-std::vector<Node> Node::getNeighbors(){
+std::vector<unsigned int> Node::getNeighbors(){
 	return neighbors;
 }
 

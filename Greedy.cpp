@@ -21,19 +21,20 @@ void Greedy::findMax(){
 	for (unsigned int i = 0; i < bSize ; i++){
 
 		// id of the current neighbor of biggest
-		unsigned int current = original.getNodes().at(biggest).getNeighbors().at(i).getId();
+		unsigned int current = original.getNodes().at(biggest).getNeighbors().at(i);
 
 		// commonNodes initialization
 		Graph commonNodes = Graph();
 		commonNodes.addNode(original.getNodes().at(biggest));
 		commonNodes.addNode(original.getNodes().at(current));
 		// vector of neighbors
-		std::vector<Node> tempVector = original.getNodes().at(biggest).getNeighbors();
+		std::vector<unsigned int> tempVector = original.getNodes().at(biggest).getNeighbors();
 
 		for (unsigned int j = 0; j < original.getNodes().at(current).getNeighbors().size(); j++){
 			// if currentNode contains nodes in common with biggest => added into commonNodes
 			if (FIND(tempVector, original, current, j)){
-				commonNodes.addNode(original.getNodes().at(current).getNeighbors().at(j));
+				int nodeId = original.getNodes().at(current).getNeighbors().at(j);
+				commonNodes.addNode(original.getNodes().at(nodeId));
 			}
 		}
 
