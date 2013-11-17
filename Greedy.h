@@ -15,7 +15,7 @@ private:
 	Graph clique;
 public:
 	Greedy(Graph g);
-	void findMax();
+	Graph findMax();
 };
 
 

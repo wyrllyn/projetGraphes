@@ -9,5 +9,14 @@ int main() {
 	std::cout << "Creating Greedy object ..." << std::endl;
 	Greedy greedo(g);
 	std::cout << "Running findMax method ..." << std::endl;
-	greedo.findMax();
+	Graph result = greedo.findMax();
+	std::cout << result;
+	/*TODO:
+	 * recup clique max
+	 * operator<< dans graph
+	 * écrire résultats dans un fichier
+	 * format:
+	 * 	Graphe: nombre de noeuds:
+	 * 		Noeud n°X: idVoisin1, idVoisin2, ...
+	 */
 }

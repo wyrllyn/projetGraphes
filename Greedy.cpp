@@ -4,7 +4,7 @@ Greedy::Greedy(Graph g) : original(g), clique() {
 
 }
 
-void Greedy::findMax(){
+Graph Greedy::findMax(){
 	unsigned int biggest = 0;
 	unsigned int bSize = 0;
 
@@ -53,4 +53,5 @@ void Greedy::findMax(){
 		}
 	}
 	std::cout << "Clique size=" << clique.getNodes().size() << std::endl;
+	return clique;
 }
