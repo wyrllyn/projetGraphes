@@ -10,6 +10,7 @@
 
 #include <map>
 #include <string>
+#include <ostream>
 #include "Node.h"
 
 #define NODE_INSERT_NEW(x) std::pair<unsigned int, Node>(x, Node(x))
@@ -32,5 +33,7 @@ public:
 	bool canBeAdded(Node& n);
 	virtual ~Graph();
 };
+
+std::ostream& operator<<(std::ostream& out, Graph& graph);
 
 #endif /* GRAPH_H_ */

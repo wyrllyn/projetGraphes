@@ -107,3 +107,14 @@ bool Graph::found(Node& node, Node& toFind) {
 	}
 	return false;
 }
+
+std::ostream& operator<<(std::ostream& out, Graph& graph) {
+	out << "Graph:" << std::endl;
+	std::map<unsigned int, Node> nodes = graph.getNodes();
+	out << "\tNumber of nodes: " << nodes.size() << std::endl;
+	for (std::pair<unsigned int, Node> node_pair : nodes) {
+		Node& node = node_pair.second;
+		out << "\t" << node << std::endl;
+	}
+	return out;
+}

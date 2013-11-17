@@ -9,6 +9,7 @@
 #define NODE_H_
 
 #include <vector>
+#include <ostream>
 
 class Node {
 private:
@@ -26,5 +27,7 @@ public:
 	bool operator==(const Node& n);
 	bool operator!=(const Node& n);
 };
+
+std::ostream& operator<<(std::ostream& out, Node& node);
 
 #endif /* NODE_H_ */

@@ -38,3 +38,11 @@ bool Node::operator ==(const Node& n) {
 bool Node::operator!=(const Node& n) {
 	return id != n.id;
 }
+
+std::ostream& operator<<(std::ostream& out, Node& node) {
+	out << "Node: id=" << node.getId() << "; neighbors=";
+	for (unsigned int n : node.getNeighbors()) {
+		out << " " << n;
+	}
+	return out;
+}
