@@ -34,20 +34,16 @@ void Greedy::findMax(){
 
 		for (unsigned int j = 0; j < currentNode.getNeighbors().size(); j++){
 			// if currentNode contains nodes in common with biggest => added into commonNodes
-			if (std::find(tempVector.begin(), tempVector.end(), currentNode.getNeighbors().at(j))
-				!= tempVector.end()){
-				int nodeId = currentNode.getNeighbors().at(j);
+			int nodeId = currentNode.getNeighbors().at(j);
+			if (commonNodes.canBeAdded(original.getNodes().at(nodeId))){
 				commonNodes.addNode(original.getNodes().at(nodeId));
 			}
 		}
 
 		//verification only if commonNodes' size is bigger than cliqueSize
 		if (commonNodes.getNodes().size() > clique.getNodes().size()){
-			if (commonNodes.isClique()){
+			if (commonNodes.isClique()){//possibilité de le virer
 				clique = Graph(commonNodes);
-			}
-			else{
-				//TODO : verif si on peut créer une clique à partir de commonNodes
 			}
 		}
 	}
