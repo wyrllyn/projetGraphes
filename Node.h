@@ -13,13 +13,13 @@
 class Node {
 private:
   std::vector<unsigned int> neighbors;
-  int id;
+  unsigned int id;
 public:
-	Node(int id);
+	Node(unsigned int id);
 	virtual ~Node();
 
-	void addNeighbor(int nodeId);
-	int getId();
+	void addNeighbor(unsigned int nodeId);
+	unsigned int getId();
 	std::vector<unsigned int> getNeighbors();
 
 	bool operator<(const Node& n);

@@ -20,6 +20,7 @@ private:
   std::map<unsigned int, Node> nodes;
 protected:
   void parseLine(std::string line);
+  bool found(Node& node, Node& toFind);
 public:
 	Graph(std::string fileUrl);
 	Graph();
@@ -28,7 +29,7 @@ public:
 	std::map<unsigned int, Node> getNodes();
 	void addNode(Node& n);
 	bool isClique();
-	bool canBeAdded(Node n);
+	bool canBeAdded(Node& n);
 	virtual ~Graph();
 };
 

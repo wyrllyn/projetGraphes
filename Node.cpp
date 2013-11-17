@@ -7,7 +7,7 @@
 
 #include "Node.h"
 
-Node::Node(int id) : id(id) {
+Node::Node(unsigned int id) : id(id) {
 
 }
 
@@ -15,7 +15,7 @@ Node::~Node() {
 
 }
 
-void Node::addNeighbor(int nodeId) {
+void Node::addNeighbor(unsigned int nodeId) {
 	this->neighbors.push_back(nodeId);
 }
 
@@ -23,7 +23,7 @@ std::vector<unsigned int> Node::getNeighbors(){
 	return neighbors;
 }
 
-int Node::getId() {
+unsigned int Node::getId() {
 	return id;
 }
 

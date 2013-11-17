@@ -17,7 +17,7 @@ Graph::Graph(const std::string fileUrl) {
 	while (ifs.is_open() && !ifs.eof()) {
 		std::string line;
 		getline(ifs, line);
-		std::cout << "current line:" << line << std::endl;
+		//std::cout << "current line:" << line << std::endl;
 		if (line.find("e") == 0) { //line starts with 'e'
 			parseLine(line);
 		} else if (line.find("c") == 0
@@ -25,7 +25,7 @@ Graph::Graph(const std::string fileUrl) {
 				&& line.find("number of vertices") != std::string::npos) {
 			std::string::size_type pos = line.find_last_of(":") + 1;
 			line = line.substr(pos);
-			unsigned int numberOfNodes = std::stoi(line); //TODO:number of nodes
+			unsigned int numberOfNodes = std::stoul(line); //TODO:number of nodes
 			for (unsigned int i = 1; i <= numberOfNodes; i++) {
 				this->nodes.insert(NODE_INSERT_NEW(i));
 			}
@@ -55,12 +55,13 @@ void Graph::addNode(Node& n){
 
 void Graph::parseLine(std::string line) {
 	std::string temp = line.substr(line.find_first_of(" "), line.find_last_of(" "));
-	int origin = std::stoi(temp);
+	unsigned int origin = std::stoul(temp);
 
 	temp = line.substr(line.find_last_of(" "));
-	int target = std::stoi(temp);
+	unsigned int target = std::stoul(temp);
 
 	nodes.at(origin).addNeighbor(nodes.at(target).getId());
+	nodes.at(target).addNeighbor(nodes.at(origin).getId());
 }
 
 bool Graph::isClique(){
@@ -80,16 +81,17 @@ bool Graph::isClique(){
 	return ok;
 }
 
-bool Graph::canBeAdded(Node n){
-	bool ok = true;
-	for (unsigned int i = 1; i < nodes.size() ; i++){
-		if(std::find(nodes.at(i).getNeighbors().begin(), nodes.at(i).getNeighbors().end(), n)
-		== nodes.at(i).getNeighbors().end()){
-			ok = false;
-			break;
+bool Graph::canBeAdded(Node& n){
+	//std::cout << "can Node " << n.getId() << " be added?" << std::endl;
+	for (std::pair<unsigned int, Node> node_pair : nodes){
+		Node& node = node_pair.second;
+		//std::cout << "testing for Node " << node.getId() << std::endl;
+		if(!found(node, n)){
+			//std::cout << "can't be added" << std::endl;
+			return false;
 		}
 	}
-	return ok;
+	return true;
 }
 
 std::map<unsigned int, Node> Graph::getNodes()
@@ -97,3 +99,11 @@ std::map<unsigned int, Node> Graph::getNodes()
 	return nodes;
 }
 
+bool Graph::found(Node& node, Node& toFind) {
+	for (unsigned int currentId : node.getNeighbors()) {
+		if (currentId == toFind.getId()) {
+			return true;
+		}
+	}
+	return false;
+}

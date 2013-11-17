@@ -18,6 +18,10 @@ void Greedy::findMax(){
 	}
 	std::cout << "Biggest Node=" << biggest << " (size=" << bSize << ")" << std::endl;
 
+	//biggest = 5;
+	//bSize = original.getNodes().at(biggest).getNeighbors().size();
+	//std::cout << "Biggest Node=" << biggest << " (size=" << bSize << ")" << std::endl;
+	////
 	//2nd loop to construct a sort of clique (yeah, sort of... )
 	for (unsigned int i = 0; i < bSize ; i++){
 
@@ -28,26 +32,25 @@ void Greedy::findMax(){
 		Graph commonNodes = Graph();
 		commonNodes.addNode(original.getNodes().at(biggest));
 		commonNodes.addNode(original.getNodes().at(current));
+
 		// vector of neighbors
 		std::vector<unsigned int> tempVector = original.getNodes().at(biggest).getNeighbors();
 		Node& currentNode = original.getNodes().at(current);
+		//std::cout << "currentNode=" << currentNode.getId() << " (size=" << currentNode.getNeighbors().size() << ")" << std::endl;
 
-		for (unsigned int j = 0; j < currentNode.getNeighbors().size(); j++){
+		for (unsigned int nodeId : currentNode.getNeighbors()){
 			// if currentNode contains nodes in common with biggest => added into commonNodes
-			int nodeId = currentNode.getNeighbors().at(j);
-			if (commonNodes.canBeAdded(original.getNodes().at(nodeId))){
+			if (nodeId <= original.getNodes().size() && nodeId > 0 // fucking hack
+					&& commonNodes.canBeAdded(original.getNodes().at(nodeId))){
 				commonNodes.addNode(original.getNodes().at(nodeId));
 			}
 		}
 
 		//verification only if commonNodes' size is bigger than cliqueSize
 		if (commonNodes.getNodes().size() > clique.getNodes().size()){
-			if (commonNodes.isClique()){//possibilité de le virer
-				clique = Graph(commonNodes);
-			}
+			clique = Graph(commonNodes);
+			std::cout << "New clique of size " << clique.getNodes().size() << std::endl;
 		}
 	}
-
-
-
+	std::cout << "Clique size=" << clique.getNodes().size() << std::endl;
 }
