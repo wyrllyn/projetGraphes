@@ -13,7 +13,7 @@ int main(int argc, const char* argv[]) {
 		fileName = argv[1];
 	}
 #ifdef DEBUG
-	fileName = "res/c250.9.clq";
+	fileName = "res/c125.9.clq";
 #endif
 	Graph g(fileName);
 	std::cout << "Creating Greedy object ..." << std::endl;
