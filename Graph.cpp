@@ -80,6 +80,18 @@ bool Graph::isClique(){
 	return ok;
 }
 
+bool Graph::canBeAdded(Node n){
+	bool ok = true;
+	for (unsigned int i = 1; i < nodes.size() ; i++){
+		if(std::find(nodes.at(i).getNeighbors().begin(), nodes.at(i).getNeighbors().end(), n)
+		== nodes.at(i).getNeighbors().end()){
+			ok = false;
+			break;
+		}
+	}
+	return ok;
+}
+
 std::map<unsigned int, Node> Graph::getNodes()
 {
 	return nodes;

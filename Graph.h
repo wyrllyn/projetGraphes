@@ -28,6 +28,7 @@ public:
 	std::map<unsigned int, Node> getNodes();
 	void addNode(Node& n);
 	bool isClique();
+	bool canBeAdded(Node n);
 	virtual ~Graph();
 };
 
