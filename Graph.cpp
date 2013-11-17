@@ -26,13 +26,13 @@ Graph::Graph(const std::string fileUrl) {
 			std::string::size_type pos = line.find_last_of(":") + 1;
 			line = line.substr(pos);
 			unsigned int numberOfNodes = std::stoi(line); //TODO:number of nodes
-			for (unsigned int i = 1; i < numberOfNodes; i++) {
+			for (unsigned int i = 1; i <= numberOfNodes; i++) {
 				this->nodes.insert(NODE_INSERT_NEW(i));
 			}
 			std::cout << "Created " << numberOfNodes << " nodes" << std::endl;
 		}
-		//std::cout << "end loop" << std::endl;
 	}
+	std::cout << "Graph creation was successful" << std::endl;
 	ifs.close();
 }
 
@@ -51,7 +51,6 @@ Graph::~Graph() {
 void Graph::addNode(Node& n){
 	nodes.insert(NODE_INSERT(n));
 }
-
 
 
 void Graph::parseLine(std::string line) {
