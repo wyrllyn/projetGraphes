@@ -3,10 +3,18 @@
 #include "Greedy.h"
 #include <fstream>
 
-#define DEFAULT_FILE_NAME "res/c FILE:  C125.9.clq"
+#define DEFAULT_FILE_NAME "res/c125.9.clq"
+//TODO:make that a proper build configuration
+#define DEBUG
 
-int main() {
-	std::string fileName = "res/c250.9.clq";
+int main(int argc, const char* argv[]) {
+	std::string fileName = DEFAULT_FILE_NAME;
+	if (argc > 1) {
+		fileName = argv[1];
+	}
+#ifdef DEBUG
+	fileName = "res/c250.9.clq";
+#endif
 	Graph g(fileName);
 	std::cout << "Creating Greedy object ..." << std::endl;
 	Greedy greedo(g);
