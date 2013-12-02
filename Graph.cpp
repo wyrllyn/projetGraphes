@@ -104,7 +104,7 @@ std::map<unsigned int, Node*>& Graph::getNodeMap()
 	return nodeMap;
 }
 
-std::set<Node*>& Graph::getNodeSet() {
+std::set<Node*, nodeComparator>& Graph::getNodeSet() {
 	return nodeSet;
 }
 

@@ -20,7 +20,7 @@
 class Graph {
 private:
   std::map<unsigned int, Node*> nodeMap;
-  std::set<Node*> nodeSet;
+  std::set<Node*, nodeComparator> nodeSet;
 protected:
   void parseLine(std::string line);
   bool found(Node* node, Node* toFind);
@@ -30,7 +30,7 @@ public:
 	Graph(const Graph& graph);
 	//sara : pour avoir accès aux nodes
 	std::map<unsigned int, Node*>& getNodeMap();
-	std::set<Node*>& getNodeSet();
+	std::set<Node*, nodeComparator>& getNodeSet();
 	void addNode(Node* n);
 	bool isClique();
 	bool canBeAdded(Node* n);

@@ -30,5 +30,10 @@ public:
 
 std::ostream& operator<<(std::ostream& out, Node& node);
 bool operator<(const Node& n, const Node& m);
+struct nodeComparator {
+  bool operator() (const Node* left, const Node* right) const {
+	  return *left < *right;
+  }
+};
 
 #endif /* NODE_H_ */
