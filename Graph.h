@@ -19,7 +19,7 @@
 
 class Graph {
 private:
-  std::map<unsigned int, Node*> nodes;
+  std::map<unsigned int, Node*> nodeMap;
   std::set<Node*> nodeSet;
 protected:
   void parseLine(std::string line);
@@ -29,7 +29,8 @@ public:
 	Graph();
 	Graph(const Graph& graph);
 	//sara : pour avoir accès aux nodes
-	std::map<unsigned int, Node*>& getNodes();
+	std::map<unsigned int, Node*>& getNodeMap();
+	std::set<Node*>& getNodeSet();
 	void addNode(Node* n);
 	bool isClique();
 	bool canBeAdded(Node* n);
