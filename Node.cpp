@@ -23,8 +23,12 @@ std::vector<unsigned int> Node::getNeighbors(){
 	return neighbors;
 }
 
-unsigned int Node::getId() {
+unsigned int Node::getId() const {
 	return id;
+}
+
+bool operator<(const Node& n, const Node& m) {
+	return n.getId() < m.getId();
 }
 
 bool Node::operator<(const Node& n) {

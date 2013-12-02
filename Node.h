@@ -20,7 +20,7 @@ public:
 	virtual ~Node();
 
 	void addNeighbor(unsigned int nodeId);
-	unsigned int getId();
+	unsigned int getId() const;
 	std::vector<unsigned int> getNeighbors();
 
 	bool operator<(const Node& n);
@@ -29,5 +29,6 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& out, Node& node);
+bool operator<(const Node& n, const Node& m);
 
 #endif /* NODE_H_ */

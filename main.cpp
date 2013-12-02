@@ -4,8 +4,8 @@
 #include <fstream>
 
 #define DEFAULT_FILE_NAME "res/c125.9.clq"
-//TODO:make that a proper build configuration
-#define DEBUG
+
+//#define DEBUG //TODO:make that a proper build configuration
 
 int main(int argc, const char* argv[]) {
 	std::string fileName = DEFAULT_FILE_NAME;
@@ -13,7 +13,7 @@ int main(int argc, const char* argv[]) {
 		fileName = argv[1];
 	}
 #ifdef DEBUG
-	fileName = "res/c125.9.clq";
+	fileName = "res/C2000.9.clq";
 #endif
 	Graph g(fileName);
 	std::cout << "Creating Greedy object ..." << std::endl;
