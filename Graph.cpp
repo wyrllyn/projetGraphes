@@ -123,7 +123,7 @@ std::ostream& operator<<(std::ostream& out, Graph& graph) {
 	out << "\tNumber of nodes: " << nodes.size() << std::endl;
 	for (std::pair<unsigned int, Node*> node_pair : nodes) {
 		Node* node = node_pair.second;
-		out << "\t" << node << std::endl;
+		out << "\t" << *node << std::endl;
 	}
 	return out;
 }
