@@ -21,7 +21,7 @@ public:
 
 	void addNeighbor(unsigned int nodeId);
 	unsigned int getId() const;
-	std::vector<unsigned int> getNeighbors();
+	std::vector<unsigned int>& getNeighbors();
 
 	bool operator<(const Node& n);
 	bool operator==(const Node& n);

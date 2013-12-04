@@ -19,7 +19,7 @@ void Node::addNeighbor(unsigned int nodeId) {
 	this->neighbors.push_back(nodeId);
 }
 
-std::vector<unsigned int> Node::getNeighbors(){
+std::vector<unsigned int>& Node::getNeighbors(){
 	return neighbors;
 }
 

@@ -32,8 +32,16 @@ Graph::Graph(const std::string fileUrl) {
 			}
 			std::cout << "Created " << numberOfNodes << " nodes" << std::endl;
 
+			//prepare nodeSet + nodeMatrix
+			nodeMatrix = new unsigned int*[numberOfNodes];
 			for (unsigned int i; i <= numberOfNodes; i++) {
 				nodeSet.insert(nodeMap[i]);
+				std::vector<unsigned int, std::allocator<unsigned int> >& neighbors
+					= nodeMap[i]->getNeighbors();
+				nodeMatrix[i] = new unsigned int[ neighbors.size() ];
+				for (unsigned int j = 0; j < neighbors.size(); j++) {
+					nodeMatrix[i][j] = neighbors[j];
+				}
 			}
 		}
 	}
@@ -41,11 +49,14 @@ Graph::Graph(const std::string fileUrl) {
 	ifs.close();
 }
 
-Graph::Graph(){
+Graph::Graph() : nodeMatrix(NULL) {
 
 }
 
-Graph::Graph(const Graph& graph) : nodeMap(graph.nodeMap) {
+Graph::Graph(const Graph& graph) :
+		nodeMap(graph.nodeMap),
+		nodeSet(graph.nodeSet),
+		nodeMatrix(graph.nodeMatrix) {
 
 }
 
@@ -106,6 +117,10 @@ std::map<unsigned int, Node*>& Graph::getNodeMap()
 
 std::set<Node*, nodeComparator>& Graph::getNodeSet() {
 	return nodeSet;
+}
+
+unsigned int** Graph::getNodeMatrix() {
+	return nodeMatrix;
 }
 
 bool Graph::found(Node* node, Node* toFind) {
