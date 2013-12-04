@@ -50,7 +50,7 @@ Graph::Graph(const std::string fileUrl) {
 }
 
 Graph::Graph() : nodeMatrix(NULL) {
-
+	nodeToRemove = 0;
 }
 
 Graph::Graph(const Graph& graph) :
@@ -58,6 +58,10 @@ Graph::Graph(const Graph& graph) :
 		nodeSet(graph.nodeSet),
 		nodeMatrix(graph.nodeMatrix) {
 
+}
+
+void Graph::remove(unsigned int n){
+	nodeMap.erase(n);
 }
 
 Graph::~Graph() {
@@ -110,6 +114,23 @@ bool Graph::canBeAdded(Node* n){
 	return true;
 }
 
+bool Graph::canBeAddedOther(Node* n){
+	unsigned int cmp = 0;
+	unsigned int temp = 0;
+	for (std::pair<unsigned int, Node*> node_pair : nodeMap){
+		Node* node = node_pair.second;
+		if(!found(node, n)){
+			cmp++;
+			temp = node_pair.first;
+		}
+		if(cmp >= 2){
+			return false;
+		}
+	}
+	nodeToRemove = temp;
+	return true;
+}
+
 std::map<unsigned int, Node*>& Graph::getNodeMap()
 {
 	return nodeMap;
@@ -132,6 +153,14 @@ bool Graph::found(Node* node, Node* toFind) {
 	return false;
 }
 
+void Graph::clearNodeToRemove(){
+	nodeToRemove = 0;
+}
+
+int Graph::getNodeToRemove(){
+	return nodeToRemove;
+}
+
 std::ostream& operator<<(std::ostream& out, Graph& graph) {
 	out << "Graph:" << std::endl;
 	std::map<unsigned int, Node*>& nodes = graph.getNodeMap();
@@ -141,4 +170,11 @@ std::ostream& operator<<(std::ostream& out, Graph& graph) {
 		out << "\t" << *node << std::endl;
 	}
 	return out;
+}
+
+int Greedy::inCommon(Node* test, Node* biggest){
+	unsigned int cmp = 0;
+	for(unsigned int current : test->getNeighbors()){
+
+	}
 }

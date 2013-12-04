@@ -16,6 +16,9 @@ private:
 public:
 	Greedy(Graph g);
 	Graph findMax();
+	Graph findMaxOther();
+	unsigned int inCommon(Node* test, Node* biggest);
+	bool find(unsigned int toFind, Node* node);
 };
 
 
