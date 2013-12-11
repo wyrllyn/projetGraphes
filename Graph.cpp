@@ -15,6 +15,7 @@ Graph::Graph(const std::string fileUrl) {
 	std::ifstream ifs(fileUrl);
 	std::cout << "Opening file: " << fileUrl << std::endl;
 	setFileType(fileUrl);
+	std::cout << "File type: " << fileType << std::endl;
 	unsigned int numberOfNodes = 0;
 
 	while (ifs.is_open() && !ifs.eof()) {
@@ -23,7 +24,8 @@ Graph::Graph(const std::string fileUrl) {
 		//std::cout << "current line:" << line << std::endl;
 		if (line.find("e") == 0) { //line starts with 'e'
 			parseLine(line);
-		} else if (line.find("c") == 0 && nodeMap.size() == 0
+		} else if ((line.find("c") == 0 || line.find("p") == 0)
+				&& nodeMap.size() == 0
 				&& (numberOfNodes = extractVertices(line)) > 0) {
 
 			for (unsigned int i = 1; i <= numberOfNodes; i++) {
@@ -54,13 +56,29 @@ unsigned int Graph::extractVertices(std::string& line) {
 		if (line.find("number of vertices") != std::string::npos) {
 			std::string::size_type pos = line.find_last_of(":") + 1;
 			line = line.substr(pos);
-			std::cout << "zorg:" << line;
 			return std::stoul(line);
 		} else {
 			return 0;
 		}
 	case BROCK:
-	case DSJ:
+		if (line.find("Graph Size") != std::string::npos) {
+			std::string::size_type pos = line.find_first_of(":") + 1;
+			std::string::size_type pos_end = line.find_first_of(",");
+			line = line.substr(pos, pos_end);
+			return std::stoul(line);
+		} else {
+			return 0;
+		}
+	case DSJC:
+		//p edge 500 125248
+		if (line.find("edge") != std::string::npos) {
+			std::string::size_type pos = line.find_first_of(":") + 1;
+			std::string::size_type pos_end = line.find_first_of(",");
+			line = line.substr(pos, pos_end);
+			return std::stoul(line);
+		} else {
+			return 0;
+		}
 	case GEN:
 	case HAMMING:
 	case MANN:
@@ -71,8 +89,16 @@ unsigned int Graph::extractVertices(std::string& line) {
 }
 
 void Graph::setFileType(std::string fileUrl) {
-	if (fileUrl.find("c") == 0 || fileUrl.find("C") == 0) {
+	if (fileUrl.find_first_of("c") == 0 || fileUrl.find_first_of("C") == 0) {
 		fileType = C;
+	} else if(fileUrl.find_first_of("brock") == 0) {
+		fileType = BROCK;
+	} else if(fileUrl.find_first_of("DSJC") == 0) {
+		fileType = DSJC;
+	} else if(fileUrl.find_first_of("hamming") == 0) {
+		fileType = HAMMING;
+	} else if(fileUrl.find_first_of("MANN") == 0) {
+		fileType = MANN;
 	} else {
 		fileType = C; // default
 	}
@@ -199,6 +225,30 @@ std::ostream& operator<<(std::ostream& out, Graph& graph) {
 	for (std::pair<unsigned int, Node*> node_pair : nodes) {
 		Node* node = node_pair.second;
 		out << "\t" << *node << std::endl;
+	}
+	return out;
+}
+
+std::ostream& operator<<(std::ostream& out, FileType type) {
+	switch (type) {
+	case C:
+		out << "C";
+		break;
+	case BROCK:
+		out << "BROCK";
+		break;
+	case DSJC:
+		out << "DSJC";
+		break;
+	case GEN:
+		out << "GEN";
+		break;
+	case HAMMING:
+		out << "HAMMING";
+		break;
+	case MANN:
+		out << "MANN";
+		break;
 	}
 	return out;
 }

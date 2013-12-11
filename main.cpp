@@ -3,7 +3,7 @@
 #include "Greedy.h"
 #include <fstream>
 
-#define DEFAULT_FILE_NAME "res/c125.9.clq" // attention à la casse
+#define DEFAULT_FILE_NAME "res/brock200_2.clq" // attention à la casse
 
 int main(int argc, const char* argv[]) {
 	std::string fileName = DEFAULT_FILE_NAME;
@@ -22,7 +22,8 @@ int main(int argc, const char* argv[]) {
 	std::cout << "Running findMax method ..." << std::endl;
 	Graph result = greedo.findMaxOther();
 
-	std::ofstream ofs(std::string("results/").append(fileName.append(".result")));
+	//fileName = std::string("results/").append(fileName);
+	std::ofstream ofs(fileName.append(".result"));
 	ofs << result;
 	std::cout << "Results printed in " << fileName;
 	ofs.close();

@@ -24,7 +24,7 @@
 enum FileType {
 	C,
 	BROCK,
-	DSJ,
+	DSJC,
 	GEN,
 	HAMMING,
 	MANN
@@ -64,5 +64,6 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& out, Graph& graph);
+std::ostream& operator<<(std::ostream& out, FileType type);
 
 #endif /* GRAPH_H_ */
