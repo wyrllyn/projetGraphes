@@ -21,12 +21,22 @@
 #define NODE_INSERT_NEW(x) std::pair<unsigned int, Node*>(x, new Node(x))
 #define NODE_INSERT(node) std::pair<unsigned int, Node*>(node->getId(), node)
 
+enum FileType {
+	C,
+	BROCK,
+	DSJ,
+	GEN,
+	HAMMING,
+	MANN
+};
+
 class Graph {
 private:
   std::map<unsigned int, Node*> nodeMap;
   std::set<Node*, nodeComparator> nodeSet;
   unsigned int** nodeMatrix;
   int nodeToRemove;
+  FileType fileType;
 protected:
   void parseLine(std::string line);
   bool found(Node* node, Node* toFind);
@@ -34,11 +44,17 @@ public:
 	Graph(std::string fileUrl);
 	Graph();
 	Graph(const Graph& graph);
+
 	std::map<unsigned int, Node*>& getNodeMap();
 	std::set<Node*, nodeComparator>& getNodeSet();
+	unsigned int** getNodeMatrix();
+
+	void setFileType(std::string fileUrl);
+	unsigned int extractVertices(std::string& line);
+
 	void clearNodeToRemove();
 	int getNodeToRemove();
-	unsigned int** getNodeMatrix();
+
 	void addNode(Node* n);
 	bool isClique();
 	void remove(unsigned int n);
