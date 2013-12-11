@@ -74,15 +74,21 @@ unsigned int Graph::extractVertices(std::string& line) {
 			return 0;
 		}
 	case DSJC:
-	case GEN:
 	case HAMMING:
 		//p edge [number]
-		std::cout << "###" << line << std::endl;
 		if (line.find("edge") != std::string::npos) {
 			std::string::size_type pos = line.find_last_of("edge") + 1;
 			std::string::size_type pos_end = line.find_last_of(" ") - 1;
 			line = line.substr(pos, pos_end);
-			std::cout << "### ###" << line << std::endl;
+			return std::stoul(line);
+		} else {
+			return 0;
+		}
+	case GEN:
+		//c [number] vertices
+		if (line.find("vertices") != std::string::npos) {
+			std::string::size_type pos_end = line.find_first_of("vertices") - 1;
+			line = line.substr(2, pos_end);
 			return std::stoul(line);
 		} else {
 			return 0;
@@ -95,12 +101,15 @@ unsigned int Graph::extractVertices(std::string& line) {
 void Graph::setFileType(std::string fileUrl) {
 	std::string::size_type slashPos = fileUrl.find_last_of("/") + 1;
 	fileUrl = fileUrl.substr(slashPos, std::string::npos);
+	std::cout << "fileurl=" << fileUrl << std::endl;
 	if (fileUrl.find_first_of("c") == 0 || fileUrl.find_first_of("C") == 0) {
 		fileType = C;
 	} else if(fileUrl.find_first_of("brock") == 0) {
 		fileType = BROCK;
 	} else if(fileUrl.find_first_of("DSJC") == 0) {
 		fileType = DSJC;
+	} else if (fileUrl.find_first_of("gen") == 0) {
+		fileType = GEN;
 	} else if(fileUrl.find_first_of("hamming") == 0) {
 		fileType = HAMMING;
 	} else if(fileUrl.find_first_of("MANN") == 0) {
