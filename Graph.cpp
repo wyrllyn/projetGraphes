@@ -33,22 +33,23 @@ Graph::Graph(const std::string fileUrl) {
 				this->nodeMap.insert(NODE_INSERT_NEW(i));
 			}
 			std::cout << "Created " << numberOfNodes << " nodes" << std::endl;
-
-			//prepare nodeSet + nodeMatrix
-			nodeMatrix = new unsigned int*[numberOfNodes];
-			sizeOfN = new unsigned int [numberOfNodes];
-			for (unsigned int i; i <= numberOfNodes; i++) {
-				nodeSet.insert(nodeMap[i]);
-				std::vector<unsigned int, std::allocator<unsigned int> >& neighbors
-					= nodeMap[i]->getNeighbors();
-				nodeMatrix[i] = new unsigned int[ neighbors.size() ];
-				sizeOfN[i] = neighbors.size();
-				for (unsigned int j = 0; j < neighbors.size(); j++) {
-					nodeMatrix[i][j] = neighbors[j];
-				}
-			}
 		}
 	}
+
+	//prepare nodeSet + nodeMatrix
+	nodeMatrix = new unsigned int*[numberOfNodes + 1];
+	sizeOfN = new unsigned int [numberOfNodes + 1];
+	for (unsigned int i = 1; i <= numberOfNodes; i++) {
+		nodeSet.insert(nodeMap[i]);
+		std::vector<unsigned int, std::allocator<unsigned int> >&
+		neighbors = nodeMap[i]->getNeighbors();
+		nodeMatrix[i] = new unsigned int[ neighbors.size() ];
+		sizeOfN[i] = neighbors.size();
+		for (unsigned int j = 0; j < neighbors.size(); j++) {
+			nodeMatrix[i][j] = neighbors[j];
+		}
+	}
+
 	assert(nodeMap.size() > 0);
 	std::cout << "Graph creation was successful" << std::endl;
 	ifs.close();
@@ -103,7 +104,6 @@ unsigned int Graph::extractVertices(std::string& line) {
 void Graph::setFileType(std::string fileUrl) {
 	std::string::size_type slashPos = fileUrl.find_last_of("/") + 1;
 	fileUrl = fileUrl.substr(slashPos, std::string::npos);
-	std::cout << "fileurl=" << fileUrl << std::endl;
 	if (fileUrl.find_first_of("c") == 0 || fileUrl.find_first_of("C") == 0) {
 		fileType = C;
 	} else if(fileUrl.find_first_of("brock") == 0) {
@@ -146,9 +146,6 @@ void Graph::addNode(Node* n){
 	nodeMap.insert(NODE_INSERT(n));
 }
 
-unsigned int* Graph::getSizeOfN(){
-	return sizeOfN;
-}
 
 
 void Graph::parseLine(std::string line) {
@@ -272,4 +269,9 @@ std::ostream& operator<<(std::ostream& out, FileType type) {
 		break;
 	}
 	return out;
+}
+
+
+unsigned int Graph::getSizeOfN(unsigned int n){
+	return sizeOfN[n];
 }

@@ -3,7 +3,7 @@
 #include "Greedy.h"
 #include <fstream>
 
-#define DEFAULT_FILE_NAME "res/gen200_p0.9_44.clq" // attention à la casse
+#define DEFAULT_FILE_NAME "res/c125.9.clq" // attention à la casse
 
 int main(int argc, const char* argv[]) {
 	std::string fileName = DEFAULT_FILE_NAME;
@@ -19,7 +19,7 @@ int main(int argc, const char* argv[]) {
 	std::cout << "Creating Greedy object ..." << std::endl;
 	Greedy greedo(g);
 	std::cout << "Running findMax method ..." << std::endl;
-	Graph result = greedo.findMaxOther();
+	Graph result = greedo.greedyMatrix();
 
 	std::string::size_type slashPos = fileName.find_last_of("/");
 	std::string temp = fileName.substr(0, slashPos + 1);

@@ -11,9 +11,11 @@ Greedy::Greedy(Graph g) : original(g), clique() {
  	unsigned int biggest = 0;
 	unsigned int bSize = 0;
 	for (unsigned int i = 1; i <= original.getNodeMap().size(); i++){
-		if(original.getSizeOfN()[i] > bSize){
+		std::cout << i << "=" << original.sizeOfN[i] << std::endl;
+		if(original.getSizeOfN(i) > bSize){
 			biggest = i;
-			bSize = original.getSizeOfN()[i];
+			bSize = original.getSizeOfN(i);
+			//std::cout << "#" << i << "=" << bSize << std::endl;
 		}
 	}
 	std::cout << "Biggest Node=" << biggest << " (size=" << bSize << ")" << std::endl;
@@ -29,11 +31,11 @@ Greedy::Greedy(Graph g) : original(g), clique() {
 
 		// vector of neighbors
 		std::vector<unsigned int> tempVector = original.getNodeMap().at(biggest)->getNeighbors();
-		Node* currentNode = original.getNodeMap().at(current);
+		//Node* currentNode = original.getNodeMap().at(current);
 		//std::cout << "currentNode=" << currentNode.getId() << " (size=" << currentNode.getNeighbors().size() << ")" << std::endl;
 
 
-		for (unsigned int k = 1; k <= original.getSizeOfN()[current] ; k++ ){
+		for (unsigned int k = 1; k <= original.getSizeOfN(current) ; k++ ){
 			unsigned int nodeId =  original.getNodeMatrix()[current][k];
 			if (nodeId <= original.getNodeMap().size() && nodeId > 0
 					&& commonNodes.canBeAddedOther(original.getNodeMap().at(nodeId))){
