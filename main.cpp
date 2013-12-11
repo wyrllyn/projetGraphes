@@ -3,7 +3,7 @@
 #include "Greedy.h"
 #include <fstream>
 
-#define DEFAULT_FILE_NAME "res/brock200_2.clq" // attention à la casse
+#define DEFAULT_FILE_NAME "res/DSJC500_5.clq" // attention à la casse
 
 int main(int argc, const char* argv[]) {
 	std::string fileName = DEFAULT_FILE_NAME;
@@ -12,9 +12,9 @@ int main(int argc, const char* argv[]) {
 	}
 
 	//TODO list of files
-	//TODO adapt parsing
 	//TODO use matrix whenever possible
-	//TODO output results in result/algo folder
+	//TODO output results in results folder
+	//TODO check memory usage & delete old items
 
 	Graph g(fileName);
 	std::cout << "Creating Greedy object ..." << std::endl;

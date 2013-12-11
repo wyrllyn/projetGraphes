@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <assert.h>
 
 Graph::Graph(const std::string fileUrl) {
 	std::ifstream ifs(fileUrl);
@@ -46,6 +47,7 @@ Graph::Graph(const std::string fileUrl) {
 			}
 		}
 	}
+	assert(nodeMap.size() > 0);
 	std::cout << "Graph creation was successful" << std::endl;
 	ifs.close();
 }
@@ -61,6 +63,8 @@ unsigned int Graph::extractVertices(std::string& line) {
 			return 0;
 		}
 	case BROCK:
+	case MANN:
+		//Graph Size: [number]
 		if (line.find("Graph Size") != std::string::npos) {
 			std::string::size_type pos = line.find_first_of(":") + 1;
 			std::string::size_type pos_end = line.find_first_of(",");
@@ -70,20 +74,19 @@ unsigned int Graph::extractVertices(std::string& line) {
 			return 0;
 		}
 	case DSJC:
-		//p edge 500 125248
+	case GEN:
+	case HAMMING:
+		//p edge [number]
+		std::cout << "###" << line << std::endl;
 		if (line.find("edge") != std::string::npos) {
 			std::string::size_type pos = line.find_last_of("edge") + 1;
 			std::string::size_type pos_end = line.find_last_of(" ") - 1;
 			line = line.substr(pos, pos_end);
-			std::cout << "###" << line << std::endl;
+			std::cout << "### ###" << line << std::endl;
 			return std::stoul(line);
 		} else {
 			return 0;
 		}
-	case GEN:
-	case HAMMING:
-	case MANN:
-		return 0;
 	default:
 		return 0;
 	}
