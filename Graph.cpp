@@ -14,19 +14,18 @@
 Graph::Graph(const std::string fileUrl) {
 	std::ifstream ifs(fileUrl);
 	std::cout << "Opening file: " << fileUrl << std::endl;
+	setFileType(fileUrl);
+	unsigned int numberOfNodes = 0;
+
 	while (ifs.is_open() && !ifs.eof()) {
 		std::string line;
 		getline(ifs, line);
 		//std::cout << "current line:" << line << std::endl;
 		if (line.find("e") == 0) { //line starts with 'e'
 			parseLine(line);
-		} else if (line.find("c") == 0
-				&& nodeMap.size() == 0
-				&& line.find("number of vertices") != std::string::npos) {
-			std::string::size_type pos = line.find_last_of(":") + 1;
-			line = line.substr(pos);
+		} else if (line.find("c") == 0 && nodeMap.size() == 0
+				&& (numberOfNodes = extractVertices(line)) > 0) {
 
-			unsigned int numberOfNodes = std::stoul(line);
 			for (unsigned int i = 1; i <= numberOfNodes; i++) {
 				this->nodeMap.insert(NODE_INSERT_NEW(i));
 			}
@@ -49,14 +48,46 @@ Graph::Graph(const std::string fileUrl) {
 	ifs.close();
 }
 
-Graph::Graph() : nodeMatrix(NULL) {
+unsigned int Graph::extractVertices(std::string& line) {
+	switch (fileType) {
+	case C:
+		if (line.find("number of vertices") != std::string::npos) {
+			std::string::size_type pos = line.find_last_of(":") + 1;
+			line = line.substr(pos);
+			std::cout << "zorg:" << line;
+			return std::stoul(line);
+		} else {
+			return 0;
+		}
+	case BROCK:
+	case DSJ:
+	case GEN:
+	case HAMMING:
+	case MANN:
+		return 0;
+	default:
+		return 0;
+	}
+}
+
+void Graph::setFileType(std::string fileUrl) {
+	if (fileUrl.find("c") == 0 || fileUrl.find("C") == 0) {
+		fileType = C;
+	} else {
+		fileType = C; // default
+	}
+}
+
+Graph::Graph() : nodeMatrix(NULL), fileType(C) {
 	nodeToRemove = 0;
 }
 
 Graph::Graph(const Graph& graph) :
 		nodeMap(graph.nodeMap),
 		nodeSet(graph.nodeSet),
-		nodeMatrix(graph.nodeMatrix) {
+		nodeMatrix(graph.nodeMatrix),
+		nodeToRemove(graph.nodeToRemove),
+		fileType(graph.fileType) {
 
 }
 
@@ -170,11 +201,4 @@ std::ostream& operator<<(std::ostream& out, Graph& graph) {
 		out << "\t" << *node << std::endl;
 	}
 	return out;
-}
-
-int Greedy::inCommon(Node* test, Node* biggest){
-	unsigned int cmp = 0;
-	for(unsigned int current : test->getNeighbors()){
-
-	}
 }
