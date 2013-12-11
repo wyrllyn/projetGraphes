@@ -35,6 +35,7 @@ private:
   std::map<unsigned int, Node*> nodeMap;
   std::set<Node*, nodeComparator> nodeSet;
   unsigned int** nodeMatrix;
+  unsigned int* sizeOfN;
   int nodeToRemove;
   FileType fileType;
 protected:
@@ -48,6 +49,7 @@ public:
 	std::map<unsigned int, Node*>& getNodeMap();
 	std::set<Node*, nodeComparator>& getNodeSet();
 	unsigned int** getNodeMatrix();
+	unsigned int* getSizeOfN();
 
 	void setFileType(std::string fileUrl);
 	unsigned int extractVertices(std::string& line);
