@@ -12,7 +12,6 @@ int main(int argc, const char* argv[]) {
 	}
 
 	//TODO use matrix whenever possible
-	//TODO output results in results folder
 	//TODO check memory usage & delete old items
 	//TODO list of files
 
@@ -22,7 +21,10 @@ int main(int argc, const char* argv[]) {
 	std::cout << "Running findMax method ..." << std::endl;
 	Graph result = greedo.findMaxOther();
 
-	//fileName = std::string("results/").append(fileName);
+	std::string::size_type slashPos = fileName.find_last_of("/");
+	std::string temp = fileName.substr(0, slashPos + 1);
+	fileName = fileName.substr(slashPos + 1);
+	fileName = temp.append(std::string("results/").append(fileName));
 	std::ofstream ofs(fileName.append(".result"));
 	ofs << result;
 	std::cout << "Results printed in " << fileName;
