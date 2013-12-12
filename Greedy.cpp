@@ -11,11 +11,9 @@ Greedy::Greedy(Graph g) : original(g), clique() {
  	unsigned int biggest = 0;
 	unsigned int bSize = 0;
 	for (unsigned int i = 1; i <= original.getNodeMap().size(); i++){
-		std::cout << i << "=" << original.sizeOfN[i] << std::endl;
 		if(original.getSizeOfN(i) > bSize){
 			biggest = i;
 			bSize = original.getSizeOfN(i);
-			//std::cout << "#" << i << "=" << bSize << std::endl;
 		}
 	}
 	std::cout << "Biggest Node=" << biggest << " (size=" << bSize << ")" << std::endl;

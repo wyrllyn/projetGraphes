@@ -123,12 +123,14 @@ void Graph::setFileType(std::string fileUrl) {
 
 Graph::Graph() : nodeMatrix(NULL), fileType(C) {
 	nodeToRemove = 0;
+	sizeOfN = NULL;
 }
 
 Graph::Graph(const Graph& graph) :
 		nodeMap(graph.nodeMap),
 		nodeSet(graph.nodeSet),
 		nodeMatrix(graph.nodeMatrix),
+		sizeOfN(graph.sizeOfN),
 		nodeToRemove(graph.nodeToRemove),
 		fileType(graph.fileType) {
 

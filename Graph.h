@@ -35,14 +35,13 @@ private:
   std::map<unsigned int, Node*> nodeMap;
   std::set<Node*, nodeComparator> nodeSet;
   unsigned int** nodeMatrix;
-
+  unsigned int* sizeOfN;
   int nodeToRemove;
   FileType fileType;
 protected:
   void parseLine(std::string line);
   bool found(Node* node, Node* toFind);
 public:
-  unsigned int* sizeOfN;
 	Graph(std::string fileUrl);
 	Graph();
 	Graph(const Graph& graph);
