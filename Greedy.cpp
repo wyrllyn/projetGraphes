@@ -36,7 +36,7 @@ Greedy::Greedy(Graph g) : original(g), clique() {
 		for (unsigned int k = 0; k <= original.getSizeOfN(current) ; k++ ){
 			unsigned int nodeId =  original.getNodeMatrix()[current][k];
 			if (nodeId <= original.getNodeMap().size() && nodeId > 0
-					&& commonNodes.canBeAddedOther(original.getNodeMap().at(nodeId))){
+					&& commonNodes.canBeAddedMatrix(nodeId)){
 				//if nodeId is in the neighborhood of every node in the clique
 				if (commonNodes.getNodeToRemove() == 0){
 					commonNodes.addNode(original.getNodeMap().at(nodeId));

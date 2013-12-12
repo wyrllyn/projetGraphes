@@ -46,6 +46,9 @@ public:
 	Graph();
 	Graph(const Graph& graph);
 
+	bool found(unsigned int node, unsigned int toFind);
+	bool canBeAddedMatrix(unsigned int n);
+
 	std::map<unsigned int, Node*>& getNodeMap();
 	std::set<Node*, nodeComparator>& getNodeSet();
 	unsigned int** getNodeMatrix();

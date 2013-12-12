@@ -208,6 +208,22 @@ bool Graph::canBeAddedOther(Node* n){
 	return true;
 }
 
+bool Graph::canBeAddedMatrix(unsigned int n){
+	unsigned int cmp = 0;
+	unsigned int temp = 0;
+	for (unsigned int node = 1; node < nodeMap.size(); node++){
+		if(!found(node, n)){
+			cmp++;
+			temp = node;
+		}
+		if(cmp >= 2){
+			return false;
+		}
+	}
+	nodeToRemove = temp;
+	return true;
+}
+
 std::map<unsigned int, Node*>& Graph::getNodeMap()
 {
 	return nodeMap;
@@ -224,6 +240,15 @@ unsigned int** Graph::getNodeMatrix() {
 bool Graph::found(Node* node, Node* toFind) {
 	for (unsigned int currentId : node->getNeighbors()) {
 		if (currentId == toFind->getId()) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Graph::found(unsigned int node, unsigned int toFind) {
+	for (unsigned int i = 0; i < sizeOfN[node]; i++) {
+		if (nodeMatrix[node][i] == toFind) {
 			return true;
 		}
 	}
