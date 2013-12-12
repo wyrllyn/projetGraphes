@@ -18,7 +18,7 @@ Greedy::Greedy(Graph g) : original(g), clique() {
 	}
 	std::cout << "Biggest Node=" << biggest << " (size=" << bSize << ")" << std::endl;
 
-	for (unsigned int j = 0; j <= bSize ; j++){
+	for (unsigned int j = 0; j < bSize ; j++){
 		// id of the current neighbor of biggest
 		unsigned int current = original.getNodeMatrix()[biggest][j];
 
@@ -33,7 +33,7 @@ Greedy::Greedy(Graph g) : original(g), clique() {
 		//std::cout << "currentNode=" << currentNode.getId() << " (size=" << currentNode.getNeighbors().size() << ")" << std::endl;
 
 
-		for (unsigned int k = 1; k <= original.getSizeOfN(current) ; k++ ){
+		for (unsigned int k = 0; k <= original.getSizeOfN(current) ; k++ ){
 			unsigned int nodeId =  original.getNodeMatrix()[current][k];
 			if (nodeId <= original.getNodeMap().size() && nodeId > 0
 					&& commonNodes.canBeAddedOther(original.getNodeMap().at(nodeId))){
