@@ -44,6 +44,7 @@ protected:
 public:
 	Graph(std::string fileUrl);
 	Graph();
+	Graph::Graph(std::map<unsigned int, Node*> nodeMap)
 	Graph(const Graph& graph);
 
 	bool found(unsigned int node, unsigned int toFind);

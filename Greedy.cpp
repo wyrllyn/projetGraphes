@@ -23,12 +23,12 @@ Greedy::Greedy(Graph g) : original(g), clique() {
 		unsigned int current = original.getNodeMatrix()[biggest][j];
 
 		// commonNodes initialization
-		Graph commonNodes = Graph();
+		Graph commonNodes = Graph(original.getNodeMap());
 		commonNodes.addNode(original.getNodeMap().at(biggest));
 		commonNodes.addNode(original.getNodeMap().at(current));
 
 		// vector of neighbors
-		std::vector<unsigned int> tempVector = original.getNodeMap().at(biggest)->getNeighbors();
+		//std::vector<unsigned int> tempVector = original.getNodeMap().at(biggest)->getNeighbors();
 		//Node* currentNode = original.getNodeMap().at(current);
 		//std::cout << "currentNode=" << currentNode.getId() << " (size=" << currentNode.getNeighbors().size() << ")" << std::endl;
 

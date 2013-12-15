@@ -144,8 +144,31 @@ Graph::~Graph() {
 
 }
 
+/**
+ * Creates an empty Graph EXCEPT for its nodeMatrix and sizeOfN array,
+ * which are initialized based on the provided nodeMap.
+ */
+Graph::Graph(std::map<unsigned int, Node*> nodeMap) :
+			nodeToRemove(0),
+			fileType(C) {
+	nodeMatrix = new unsigned int[nodeMap.size() + 1][];
+	sizeOfN = new unsigned int[nodeMap.size() + 1];
+	// make sure nodeMatrix and sizeOfN contain all the info we need
+	for (unsigned int i = 0; i < nodeMap.size(); i++) {
+		Node* n = nodeMap[i];
+		unsigned int size = n->getNeighbors().size();
+		sizeOfN[i] = size;
+		nodeMatrix[i] = new unsigned int[size];
+		for (int j = 0; j < size; j++) {
+			nodeMatrix[i][j] = n->getNeighbors()[j];
+		}
+	}
+}
+
 void Graph::addNode(Node* n){
 	nodeMap.insert(NODE_INSERT(n));
+	nodeMatrix[n->getId()] = new unsigned int[n->getNeighbors().size()];
+	sizeOfN[n->getId()] = n->getNeighbors().size();
 }
 
 
@@ -211,8 +234,11 @@ bool Graph::canBeAddedOther(Node* n){
 bool Graph::canBeAddedMatrix(unsigned int n){
 	unsigned int cmp = 0;
 	unsigned int temp = 0;
-	for (unsigned int node = 1; node < nodeMap.size(); node++){
+	std::cout << "pouet" << std::endl;
+	for (unsigned int node = 1; node <= nodeMap.size(); node++){
+		std::cout << "##" << node << std::endl;
 		if(!found(node, n)){
+			std::cout << "not found" << std::endl;
 			cmp++;
 			temp = node;
 		}
@@ -247,7 +273,10 @@ bool Graph::found(Node* node, Node* toFind) {
 }
 
 bool Graph::found(unsigned int node, unsigned int toFind) {
+	std::cout << "node=" << node << "; toFind=" << toFind << std::endl;
+	//std::cout << sizeOfN[];
 	for (unsigned int i = 0; i < sizeOfN[node]; i++) {
+		std::cout << "node=" << node << "; i=" << i << "; toFind=" << toFind << "; NM[node][i]=" << nodeMatrix[node][i] << std::endl;
 		if (nodeMatrix[node][i] == toFind) {
 			return true;
 		}
